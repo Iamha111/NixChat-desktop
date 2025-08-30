@@ -403,7 +403,7 @@ class Core:
 
         self.settings = {
             "background": "1.jpg",
-            "server": "https://nixchat-server.onrender.com"
+            "server": "https://Iamha111.pythonanywhere.com"
         }
 
         try:
