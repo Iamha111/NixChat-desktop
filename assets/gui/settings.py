@@ -50,11 +50,13 @@ class AccountSettings(QWidget):
     def acc_pixmap_select(self):
         "Account pixmap selection"
 
+        filter = "Pictures (*.png *.jpeg *.jpg *.bmp *.gif *.tiff *.webp)"
+
         path, _ = QFileDialog.getOpenFileName(
             caption="Выберите аватарку",
-            dir=""
+            dir="",
+            filter=filter
         )
-        #filter="Images (*.png, *.jpg, *.jpeg, *.bmp, *.gif, *.tiff, *.webp)"
 
         if path:
             pixmap = QPixmap(path)
