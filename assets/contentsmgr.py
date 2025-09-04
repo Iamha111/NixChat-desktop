@@ -24,9 +24,12 @@ class ContentsManager:
     def add_picture(self):
         "Select and add a picture"
 
+        filter = "Pictures (*.png *.jpeg *.jpg *.bmp *.gif *.tiff *.webp)"
+
         pathes, _ = QFileDialog.getOpenFileNames(
             caption="Выберите картинки",
-            dir=""
+            dir="",
+            filter=filter
         )
 
         if pathes:
