@@ -244,28 +244,36 @@ class Core:
         "Load chats data"
 
         if os.path.exists(self.get_data_path("data")):
-            data = json.loads(
-                self.secretmgr.load_data(self.get_data_path("data"))
-            )
+            try:
+                data = json.loads(
+                    self.secretmgr.load_data(self.get_data_path("data"))
+                )
 
-            self.token = data["token"]
-            self.username = data["username"]
-            self.private_key = serialization.load_pem_private_key(
-                data["private_key"].encode(),
-                password=None
-            )
+                self.token = data["token"]
+                self.username = data["username"]
+                self.private_key = serialization.load_pem_private_key(
+                    data["private_key"].encode(),
+                    password=None
+                )
 
-            for chat in data["chats"]:
-            
-                if chat["group"]:
-                    c = self.messagemgr.add_chat(chat["name"], True)
-                else:
-                    c = self.messagemgr.add_chat(chat["name"])
+                for chat in data["chats"]:
+                
+                    if chat["group"]:
+                        c = self.messagemgr.add_chat(chat["name"], True)
+                    else:
+                        c = self.messagemgr.add_chat(chat["name"])
 
-                for msg in chat["messages"]:
-                    self.messagemgr.add_message(
-                        0, msg["contents"], msg["time"], chat["name"]
-                    )
+                    for msg in chat["messages"]:
+                        self.messagemgr.add_message(
+                            0, msg["contents"], msg["time"], chat["name"]
+                        )
+            except:
+                QMessageBox.critical(
+                    self.gui,
+                    "Ошибка",
+                    "Не удалось загрузить данные."
+                )
+                self.exit()
 
             try:
                 self.tick()
@@ -378,7 +386,6 @@ class Core:
         "Set account pixmap"
 
         b64 = base64.b64encode(pixmap).decode()
-
         data = {"pixmap": b64}
 
         self.communicator.set_my_info(self.token, data)
@@ -484,7 +491,7 @@ if __name__ == "__main__":
             quit()
         
         elif arg in ["--version", "-v"]:
-            print("raw")
+            print("v1.0.1")
             quit()
 
         elif arg in ["--start-hidden", "-H"]:
