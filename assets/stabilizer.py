@@ -38,7 +38,7 @@ def check_server_resp(response, core):
     "Checks server's common response"
     r = True
 
-    if response != None:
+    if response != None and response.status_code != 500:
         data = response.json()
 
         if not "msg" in data:
