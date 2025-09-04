@@ -5,4 +5,4 @@ Initial release
 - Fixed account avatar selection;
 - "data" will now be deleted if NC will fail to decrypt it;
 - Now checking HTTPS request status code 500;
-- Added extension filter for file choose dialogs;
+- Added extension filter for file choose dialogs
